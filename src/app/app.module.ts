@@ -1,20 +1,26 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './views/login/login.component';
-import { ProductosComponent } from './views/productos/productos.component';
+import { LoginComponent } from './pages/login/login.component';
+import { ProductosComponent } from './pages/productos/productos.component';
+import { CreateProductoComponent } from './pages/productos/create-producto.component';
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    ProductosComponent
+    ProductosComponent,
+    CreateProductoComponent, 
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
