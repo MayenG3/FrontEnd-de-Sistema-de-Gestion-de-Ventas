@@ -1,0 +1,14 @@
+<div class="sidebar" [ngClass]="{ hidden: isSidebarHidden }">
+  <div class="header" (click)="toggleSidebar()">
+    <i class="fa-solid fa-house" ></i>
+    <span class="label">Proyecto</span>
+  </div>
+  <ul>
+    <li *ngFor="let item of navbarData">
+      <a [routerLink]="item.routeLink">
+        <i [ngClass]="item.icon"></i>
+        <span class="label">{{ item.label }}</span>
+      </a>
+    </li>
+  </ul>
+</div>
