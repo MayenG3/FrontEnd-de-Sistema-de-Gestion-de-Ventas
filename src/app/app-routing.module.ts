@@ -6,6 +6,11 @@ import { CreateProductoComponent } from './pages/productos/create-producto.compo
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { CreateClienteComponent } from './pages/clientes/createCliente.component';
 import { AuthGuard } from './auth.guard';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './pages/usuarios/crearusuario/crearusuario.component';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/creaproveedores.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,6 +19,14 @@ const routes: Routes = [
   { path: 'productos/create', component: CreateProductoComponent, canActivate: [AuthGuard] },
   {path: 'clientes',component: ClientesComponent, canActivate: [AuthGuard]},
   {path:'clientes/crear',component:CreateClienteComponent, canActivate: [AuthGuard]},
+  { path: 'clientes', component: ClientesComponent },
+
+  { path: 'usuarios', component: UsuariosComponent },
+  { path: 'usuarios/crear', component: CrearUsuarioComponent },
+  { path: 'proveedores', component: ProveedoresComponent },
+  { path: 'proveedores/crear', component: CreaproveedoresComponent },
+
+
 ];
 
 @NgModule({

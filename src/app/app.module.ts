@@ -10,6 +10,10 @@ import { FormsModule } from '@angular/forms';
 import { SidebarComponent } from './pages/sidebar/sidebar.component';
 import { ClientesComponent } from './pages/clientes/clientes.component';
 import { CreateClienteComponent } from './pages/clientes/createCliente.component';
+import { UsuariosComponent } from './pages/usuarios/usuarios.component';
+import { CrearUsuarioComponent } from './pages/usuarios/crearusuario/crearusuario.component';
+import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
+import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/creaproveedores.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +23,11 @@ import { CreateClienteComponent } from './pages/clientes/createCliente.component
     CreateProductoComponent,
     SidebarComponent,
     ClientesComponent,
-    CreateClienteComponent
+    CreateClienteComponent,
+     UsuariosComponent,
+    CrearUsuarioComponent,
+    ProveedoresComponent,
+    CreaproveedoresComponent,
   ],
   imports: [
     BrowserModule,
