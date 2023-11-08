@@ -1,5 +1,5 @@
 export interface Facturas {
-  id_factura: String;
+  id_factura: string;
   referencia:string;
   id_cliente:string;
   fecha: string;

@@ -1,0 +1,67 @@
+<app-sidebar></app-sidebar>
+<body>
+<main>
+    <form id="userForm">
+
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-md-4">
+               
+                <label for="cod_cliente">Cliente:</label><BR>
+                    <select id="cliente" name="cliente" #cliente required>
+                        <option disabled selected>Elija un cliente</option>
+                        <option *ngFor="let cliente of clientes" value="{{cliente.id_cliente}}">{{cliente.nombre}}</option>
+                    </select>
+            </div>
+            
+            <div class="col-md-4">
+                <label for="fecha">Fecha:</label>
+                <input disabled type="date" name="fecha" id="fecha" class="form-control" style="width: 200px" [value]="fechaActual">
+              </div>
+        </div>
+        <br> <br>
+
+        <div id="detalles" class="table-responsive">
+            <table id="venta" class="table" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>Código de producto</th>
+                        <th>Cantidad</th>
+                        <th>Precio unitario</th>
+                        <th>Subtotal</th>
+                        <th><button type="add" class="fas fa-plus btn btn-success" style="font-size: 15px"> Agregar </button></th>
+                    </tr>
+                </thead>
+                <tbody id="productos-tabla">
+                    <tr>
+                        <td>
+                            <select id="producto" name="producto" #producto required>
+                                <option disabled selected>Elija un producto</option>
+                                <option *ngFor="let producto of productos" value="{{producto.id_producto}}">{{producto.producto}}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <input type="number" name="cantidad" min="1" required>
+                        </td>
+                        <td>
+                            <input type="number"  name="precio" min="0.01" step="0.01" required>
+                        </td>
+                        <td>
+                            <input type="number" name="monto_total" readonly>
+                        </td>
+                        <td>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="3"><strong></strong></td>
+                        <td><label id="total" style="font-size: 25px"></label></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+        <button (click)="crearFactura(cliente.value)">Ingresar Producto</button>
+    </form>
+</main>
+
+</body>

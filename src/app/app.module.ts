@@ -15,6 +15,7 @@ import { CrearUsuarioComponent } from './pages/usuarios/crearusuario/crearusuari
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/creaproveedores.component';
 import { FacturasComponent } from './pages/facturas/facturas.component';
+import { CreatefacturasComponent } from './pages/facturas/createfacturas.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { FacturasComponent } from './pages/facturas/facturas.component';
     ProveedoresComponent,
     CreaproveedoresComponent,
     FacturasComponent,
+    CreatefacturasComponent,
   ],
   imports: [
     BrowserModule,
