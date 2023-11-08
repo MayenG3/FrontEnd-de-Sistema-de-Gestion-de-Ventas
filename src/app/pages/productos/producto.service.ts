@@ -1,14 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable, catchError, tap } from 'rxjs';
 import { Producto } from './producto';
+import { Categorias } from '../categorias/categorias';
+import Swal from 'sweetalert2';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
 
-  private url: string = "http://localhost:8083/facturador/productos"
-
+  private url: string = "http://localhost:8080/facturador/productos"
+  private urlC: string = "http://localhost:8080/facturador/categorias"
 
   constructor(private http: HttpClient) { }
 
@@ -17,16 +19,49 @@ getAll():Observable<Producto[]>{
   return this.http.get<Producto[]>(this.url);
 }
 
-create(producto:Producto):Observable<Producto>{
-  return this.http.post<Producto>(this.url, producto);
+insertarProducto(producto: Producto): Observable<Producto> {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+  return this.http.post<Producto>(this.url, producto, httpOptions).pipe(
+    tap((data) => {
+      // Imprime la respuesta en la consola
+      console.log('Respuesta del servicio insertarProducto', data);
+    }),
+    catchError((error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No se pudo agregar el producto, si el problema persiste contacte con el Administrador'
+      })
+      throw error;
+    })
+  );
 }
 
-get(id:number):Observable<Producto>{
-  return this.http.get<Producto>(this.url+'/'+id);
+updateProducto(producto: Producto): Observable<Producto> {
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    }),
+  };
+  return this.http.put< Producto>(`${this.url}`, producto, httpOptions).pipe(
+    tap((data) => {
+      // Imprime la respuesta en la consola
+      console.log('Respuesta del servicio updateProducto', data);
+    }),
+    catchError((error) => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'No se pudo actualizar el Producto, si el problema persiste contacte con el Administrador'
+      })
+      throw error;
+    })
+  );
 }
 
-update(producto:Producto):Observable<Producto>{
-  return this.http.put<Producto>(this.url, producto);
-}
 
 }

@@ -1,13 +1,11 @@
 export interface Producto {
     id_producto: number;
-    id_categoria:number;
-    categoria: {  id_categoria: number,
-        categoria:string};
+    id_categoria:string;
     producto: string;
-    existencia:number;
-    fecha_crear: string;
+    existencia:string;
+    fecha_crear: Date | null;
     usuario_crear: string;
-    fecha_mod: string;
+    fecha_mod: Date | null;
     usuario_mod: string;
     estado: string;
 }
