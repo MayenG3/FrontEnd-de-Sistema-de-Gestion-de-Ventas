@@ -11,7 +11,7 @@ import Swal from 'sweetalert2';
 export class ClientesComponent implements OnInit {
   clientes: Clientes[] = [];
   editarCliente: Clientes = {
-    id: '',
+    id_cliente: '',
     nombre: '',
     direccion: '',
     telefono: '',

@@ -14,6 +14,7 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './pages/usuarios/crearusuario/crearusuario.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/creaproveedores.component';
+import { FacturasComponent } from './pages/facturas/facturas.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/cr
     CrearUsuarioComponent,
     ProveedoresComponent,
     CreaproveedoresComponent,
+    FacturasComponent,
   ],
   imports: [
     BrowserModule,

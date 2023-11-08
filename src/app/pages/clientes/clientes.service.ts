@@ -73,4 +73,8 @@ export class clientesService {
       })
     );
   }
+
+  getAll():Observable<Clientes[]>{
+    return this.http.get<Clientes[]>(this.apiUrl);
+  }
 }

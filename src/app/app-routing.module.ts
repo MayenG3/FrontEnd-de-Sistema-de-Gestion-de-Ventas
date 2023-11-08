@@ -10,21 +10,23 @@ import { UsuariosComponent } from './pages/usuarios/usuarios.component';
 import { CrearUsuarioComponent } from './pages/usuarios/crearusuario/crearusuario.component';
 import { ProveedoresComponent } from './pages/proveedores/proveedores.component';
 import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/creaproveedores.component';
+import { FacturasComponent } from './pages/facturas/facturas.component';
 
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  {path: 'login',component: LoginComponent},
-  {path: 'productos',component: ProductosComponent, canActivate: [AuthGuard]},
+  { path: 'login',component: LoginComponent},
+  { path: 'productos',component: ProductosComponent, canActivate: [AuthGuard]},
   { path: 'productos/create', component: CreateProductoComponent, canActivate: [AuthGuard] },
-  {path: 'clientes',component: ClientesComponent, canActivate: [AuthGuard]},
-  {path:'clientes/crear',component:CreateClienteComponent, canActivate: [AuthGuard]},
+  { path: 'clientes',component: ClientesComponent, canActivate: [AuthGuard]},
+  { path:'clientes/crear',component:CreateClienteComponent, canActivate: [AuthGuard]},
   { path: 'clientes', component: ClientesComponent },
 
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'usuarios/crear', component: CrearUsuarioComponent },
   { path: 'proveedores', component: ProveedoresComponent },
   { path: 'proveedores/crear', component: CreaproveedoresComponent },
+  { path: 'facturas',component:FacturasComponent, canActivate: [AuthGuard]},
 
 
 ];

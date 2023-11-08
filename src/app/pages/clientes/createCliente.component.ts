@@ -10,7 +10,7 @@ import { Clientes } from './cliente';
 })
 export class CreateClienteComponent {
   cliente: Clientes = {
-    id: '',
+    id_cliente: '',
     nombre: '',
     direccion: '',
     telefono: '',

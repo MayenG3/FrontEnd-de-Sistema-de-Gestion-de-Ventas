@@ -46,6 +46,7 @@ export class ProductosComponent implements OnInit {
     id_categoria: string,
     ){
       const categoria = this.categorias.find((cat) => cat.id_categoria == id_categoria);
+      console.log(categoria)
       return categoria ? categoria.categoria:"Categoria no encontrada";
     }
 
