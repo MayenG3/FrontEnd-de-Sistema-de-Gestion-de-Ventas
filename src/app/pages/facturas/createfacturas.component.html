@@ -28,39 +28,44 @@
                         <th>Cantidad</th>
                         <th>Precio unitario</th>
                         <th>Subtotal</th>
-                        <th><button type="add" class="fas fa-plus btn btn-success" style="font-size: 15px"> Agregar </button></th>
+                        <th><button type="add" class="fas fa-plus btn btn-success" style="font-size: 15px" (click)="agregarFila()"> Agregar </button></th>
                     </tr>
                 </thead>
                 <tbody id="productos-tabla">
+                    <tr *ngFor="let productoAgregado of productosAgregados; let i = index">
+                        <!-- Celdas de la fila -->
+                        <td>
+                          <select id="producto{{i}}" name="producto{{i}}" [(ngModel)]="productoAgregado.producto" required>
+                            <option disabled selected>Elija un producto</option>
+                            <option *ngFor="let producto of productos" [value]="producto.id_producto">{{producto.producto}}</option>
+                          </select>
+                        </td>
+                        <td>
+                          <input type="number" name="cantidad{{i}}" min="1" [(ngModel)]="productoAgregado.cantidad" (ngModelChange)="calcularMontoTotal(i)" required>
+                        </td>
+                        <td>
+                          <input type="number" name="precio{{i}}" min="0.01" step="0.01" [(ngModel)]="productoAgregado.precio" (ngModelChange)="calcularMontoTotal(i)" required>
+                        </td>
+                        <td>
+                          <input type="number" name="monto_total{{i}}" readonly [(ngModel)]="productoAgregado.monto_total">
+                        </td>
+                        <td>
+                          <!-- Botón para eliminar la fila -->
+                          <button (click)="eliminarFila(i)" class="fas fa-trash btn btn-danger" style="font-size: 15px"></button>
+                        </td>
+                      </tr>
+                  </tbody>
+                  <tfoot>
                     <tr>
-                        <td>
-                            <select id="producto" name="producto" #producto required>
-                                <option disabled selected>Elija un producto</option>
-                                <option *ngFor="let producto of productos" value="{{producto.id_producto}}">{{producto.producto}}</option>
-                            </select>
-                        </td>
-                        <td>
-                            <input type="number" name="cantidad" min="1" required>
-                        </td>
-                        <td>
-                            <input type="number"  name="precio" min="0.01" step="0.01" required>
-                        </td>
-                        <td>
-                            <input type="number" name="monto_total" readonly>
-                        </td>
-                        <td>
-                        </td>
+                      <td colspan="3"><strong>Total</strong></td>
+                      <td><label id="total" style="font-size: 25px">{{ totalSubtotales.toFixed(2) }}</label></td>
                     </tr>
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3"><strong></strong></td>
-                        <td><label id="total" style="font-size: 25px"></label></td>
-                    </tr>
-                </tfoot>
+                  </tfoot>
+                  
             </table>
         </div>
-        <button (click)="crearFactura(cliente.value)">Ingresar Producto</button>
+        <button type="Guardar" class="far fa-save btn btn-info" value="Guardar" style="font-size: 17px" (click)="crearFactura(cliente.value)">Facturar</button>
+
     </form>
 </main>
 
