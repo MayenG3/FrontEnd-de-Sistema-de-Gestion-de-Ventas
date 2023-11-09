@@ -21,8 +21,6 @@ const routes: Routes = [
   { path: 'productos/create', component: CreateProductoComponent, canActivate: [AuthGuard] },
   { path: 'clientes',component: ClientesComponent, canActivate: [AuthGuard]},
   { path:'clientes/crear',component:CreateClienteComponent, canActivate: [AuthGuard]},
-  { path: 'clientes', component: ClientesComponent },
-
   { path: 'usuarios', component: UsuariosComponent },
   { path: 'usuarios/crear', component: CrearUsuarioComponent },
   { path: 'proveedores', component: ProveedoresComponent },

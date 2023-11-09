@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Clientes } from './cliente';
 import { clientesService } from './clientes.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth.service';
+import { Usuario } from '../login/login';
 
 @Component({
   selector: 'app-clientes',
@@ -9,6 +12,7 @@ import Swal from 'sweetalert2';
   styleUrls: ['./clientes.component.css'],
 })
 export class ClientesComponent implements OnInit {
+  usuario: any;
   clientes: Clientes[] = [];
   editarCliente: Clientes = {
     id_cliente: '',
@@ -23,7 +27,7 @@ export class ClientesComponent implements OnInit {
     estado: '',
   };
 
-  constructor(private service: clientesService) {}
+  constructor(private service: clientesService, private authService: AuthService, private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.service.getListadoClientes().subscribe((data) => {
@@ -46,6 +50,12 @@ export class ClientesComponent implements OnInit {
     // Asignar la fecha actual al objeto editarCliente
     this.editarCliente.fecha_mod = today;
     this.editarCliente.fecha_crear = fecha_crear;
+
+    //recuperar el usuario que incio sesion
+    this.usuario = this.authService.getLoggedInUser();
+
+    //asignar el id del usuario que lo modifico
+    this.editarCliente.usuario_mod = this.usuario.id_rol;
 
     this.service.updateCliente(this.editarCliente).subscribe((cliente) => {
       console.log('Cliente actualizado con éxito:', cliente);
@@ -73,13 +83,19 @@ export class ClientesComponent implements OnInit {
         const today = new Date();
         today.setHours(0, 0, 0, 0);
 
+        //recuperar el usuario que incio sesion
+        this.usuario = this.authService.getLoggedInUser();
+
+        //asignar el id del usuario que lo modifico
+        clienteEliminado.usuario_mod = this.usuario.id_rol;
+
         // Asignar la fecha actual al objeto editarCliente
         clienteEliminado.fecha_mod = today;
         clienteEliminado.fecha_crear = fecha_crear;
         clienteEliminado.estado = 'Inactivo';
         this.service.updateCliente(clienteEliminado).subscribe((cliente) => {
-          console.log('Cliente eliminado con éxito:', cliente);
-          Swal.fire('Eliminado!', 'El cliente ha sido eliminado.', 'success');
+          console.log("cliente eliminado exitosamente",cliente);
+          this.ngOnInit()
           // Realiza cualquier acción adicional después de la actualización
         });
       }

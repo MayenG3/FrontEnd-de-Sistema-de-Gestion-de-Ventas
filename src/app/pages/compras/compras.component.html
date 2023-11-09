@@ -1,0 +1,62 @@
+<app-sidebar></app-sidebar>
+<header>
+    <h1>Compras</h1>
+</header>
+<main>
+    <div class="nuevo-producto">
+        <a class="btn btn-success" id="new" style="float: right; margin-right: 2px;"
+            href="">
+            <i class="fa-solid fa-cart-plus"></i> Nueva Compra
+        </a>
+    </div>
+    <div id="userList">
+        <table id="ProductoTable" class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>
+                        <i class="fa-solid fa-hashtag" style="color: #e63946;"></i>
+                        No. Compra
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-tag" style="color: #e63946;"></i>
+                        Producto
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-circle-plus" style="color: #e63946;"></i>
+                        Cantidad
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-piggy-bank" style="color: #e63946;"></i>
+                        Precio
+                    </th>
+                    <th>
+                        <i class="fa-solid fa-bolt" style="color: #e63946;"></i>
+                        Acciones
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr *ngFor="let compra of compras">
+                        <td>
+                            {{compra.id_compra}}
+                        </td>
+                        <td>
+                            {{getProductName(compra.id_producto)}}
+                        </td>
+                        <td>
+                            {{compra.cantidad}}
+                        </td>
+                        <td>
+                            {{compra.precio_compra}}
+                        </td>
+                        <td class="td_boton">
+                            <a id="EliminarCompra"
+                                (click)="deleteCompra(compra)"
+                                class="delete-btn">Eliminar
+                            </a>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+    </div>
+</main>

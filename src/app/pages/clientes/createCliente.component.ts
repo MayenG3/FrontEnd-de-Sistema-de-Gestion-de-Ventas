@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { clientesService } from './clientes.service';
 import { Router } from '@angular/router';
 import { Clientes } from './cliente';
+import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-crearCliente',
@@ -9,6 +10,7 @@ import { Clientes } from './cliente';
   styleUrls: ['./createCliente.component.css'],
 })
 export class CreateClienteComponent {
+  usuario: any;
   cliente: Clientes = {
     id_cliente: '',
     nombre: '',
@@ -22,7 +24,7 @@ export class CreateClienteComponent {
     estado: '',
   };
 
-  constructor(private service: clientesService, private router: Router) {}
+  constructor(private service: clientesService, private router: Router, private authService: AuthService) {}
 
   crearCliente(
     nombre: string,
@@ -39,10 +41,16 @@ export class CreateClienteComponent {
     today.setHours(0,0,0,0);
 
     this.cliente.fecha_crear = today;
-    this.cliente.usuario_crear = '1';
     this.cliente.estado = 'Activo';
+
+    //recuperar el usuario que incio sesion
+    this.usuario = this.authService.getLoggedInUser();
+
+    //asignar el id del usuario que lo creo
+    this.cliente.usuario_crear = this.usuario.id_rol;
+
     this.service.insertarCliente(this.cliente).subscribe((cliente) => {
-    console.log('Cliente actualizado con éxito:', cliente);
+    console.log('Cliente creado con éxito:', cliente);
     this.router.navigate(['/clientes']);
     //Realiza cualquier acción adicional después de la actualización
     });
