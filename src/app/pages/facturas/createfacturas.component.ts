@@ -91,10 +91,11 @@ export class CreatefacturasComponent {
     this.factura.fecha_crear = today;
     this.factura.usuario_crear = '1';
     this.factura.estado = 'Emitida';
+    this.factura.referencia = 'A00';
 
     this.facturaService.insertarFactura(this.factura).subscribe((factura) => {
       this.facturaCreadaId = factura.id_factura;
-      this.factura.referencia = this.facturaCreadaId;
+      
       
       // Ahora, procesa las filas de productos agregadas dinámicamente
       for (const productoAgregado of this.productosAgregados) {

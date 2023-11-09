@@ -90,6 +90,7 @@ thead {
     cursor: pointer;
     background-color: #007bff;
     color: #fff;
+    margin-right: 10px;
 }
 
 .delete-btn {

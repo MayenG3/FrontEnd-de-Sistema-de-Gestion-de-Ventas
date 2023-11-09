@@ -3,6 +3,7 @@ import { Facturas } from './facturas';
 import { FacturasService } from './facturas.service';
 import { Clientes } from '../clientes/cliente';
 import { clientesService } from '../clientes/clientes.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-facturas',
@@ -17,9 +18,7 @@ export class FacturasComponent {
   constructor(private facturaService: FacturasService, private clienteService: clientesService){}
 
   ngOnInit(): void {
-    this.facturaService.getAll().subscribe((data)=>{
-      this.facturas = data.filter((factura) => factura.estado === 'Emitida'); 
-    })
+    this.facturaService.getAll().subscribe( f=>{ this.facturas =  f; })
 
     this.clienteService.getAll().subscribe(
       c => {
@@ -39,5 +38,43 @@ getClientsName(
     console.log(id);
     return cliente ? cliente.nombre:"Cliente no encontrado"
 
+  }
+
+
+  anular(facturaAnulada: Facturas) {
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: 'No podrás revertir esto.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sí, realiza la Anulación',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        const fecha_crear = new Date(
+          facturaAnulada.fecha_crear ? facturaAnulada.fecha_crear : ''
+        );
+        fecha_crear.setDate(fecha_crear.getDate() + 1);
+        const today = new Date();
+        today.setHours(0, 0, 0, 0);
+  
+       facturaAnulada.fecha_mod = today;
+       facturaAnulada.fecha_crear = fecha_crear;
+  
+        facturaAnulada.estado = 'Anulada';
+  
+        this.facturaService.updateFactura(facturaAnulada).subscribe(
+          (factura) => {
+            console.log('Factura Anulada con éxito:', factura);
+            Swal.fire('¡Anulada!', 'Factura Anulada con éxito', 'success');
+            this.facturaService.getAll().subscribe( f=>{ this.facturas =  f; })
+          },
+          (error) => {
+            console.error('Error al anular la Factura', error);
+          }
+        );
+      }
+    });
   }
 }

@@ -12,6 +12,7 @@ import { ProveedoresComponent } from './pages/proveedores/proveedores.component'
 import { CreaproveedoresComponent } from './pages/proveedores/creaproveedores/creaproveedores.component';
 import { FacturasComponent } from './pages/facturas/facturas.component';
 import { CreatefacturasComponent } from './pages/facturas/createfacturas.component';
+import { VistaFacturaComponent } from './pages/facturas/vista-factura/vista-factura.component';
 
 
 const routes: Routes = [
@@ -27,6 +28,7 @@ const routes: Routes = [
   { path: 'proveedores/crear', component: CreaproveedoresComponent },
   { path: 'facturas',component:FacturasComponent, canActivate: [AuthGuard]},
   { path: 'facturas/new',component:CreatefacturasComponent, canActivate: [AuthGuard]},
+  { path: 'facturas/verFactura',component:VistaFacturaComponent, canActivate: [AuthGuard]},
 
 ];
 

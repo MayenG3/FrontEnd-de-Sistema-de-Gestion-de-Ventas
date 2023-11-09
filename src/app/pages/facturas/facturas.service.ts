@@ -59,4 +59,26 @@ export class FacturasService {
       })
     );
   }
+
+  updateFactura(factura: Facturas): Observable<Facturas> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http.put< Facturas>(`${this.url}`, factura, httpOptions).pipe(
+      tap((data) => {
+        // Imprime la respuesta en la consola
+        console.log('Respuesta del servicio updateProducto', data);
+      }),
+      catchError((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudo Anular la Factura, si el problema persiste contacte con el Administrador'
+        })
+        throw error;
+      })
+    );
+  }
 }

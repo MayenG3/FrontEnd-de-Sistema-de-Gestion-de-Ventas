@@ -48,14 +48,16 @@
         </thead>
         <tbody>
             <tr *ngFor="let factura of facturas">
-                <th scope="row">{{ factura.referencia }}</th>
+                <th scope="row">{{ factura.referencia }}{{factura.id_factura}}</th>
                 <td>{{ getClientsName(factura.id_cliente) }}</td>
                 <td>{{ factura.fecha_crear }}</td>
                 <td>{{ factura.serie }}</td>
                 <td>{{ factura.numero }}</td>
                 <td>{{ factura.estado }}</td>
-                <td class="td_boton">
-                    
+                <td>
+                    <button class="edit-btn" target="_blank">Ver Factura</button>
+                    <button id="AnularFactura" class="delete-btn" (click)="anular(factura)" 
+                    *ngIf="factura.estado === 'Emitida'" [disabled]="factura.estado !== 'Emitida'">Anular</button>
                 </td>
 
             </tr>        
