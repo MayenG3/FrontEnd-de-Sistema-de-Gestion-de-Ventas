@@ -15,10 +15,6 @@ export class usuarioservice {
 
   constructor(private http: HttpClient, private router: Router) {}
 
-  getusuarios(): Observable<Usuarios[]> {
-    return this.http.get<Usuarios[]>(this.url);
-  }
-
   getListadoUsuarios():Observable<Usuarios[]>{
     return this.http.get<Usuarios[]>(this.url);
   }
@@ -41,13 +37,13 @@ export class usuarioservice {
     return this.http.put<Usuarios>(`${this.url}`, usuario, httpOptions).pipe(
       tap((data) => {
         // Imprime la respuesta en la consola
-        console.log('Respuesta del servicio updateCliente', data);
+        console.log('Respuesta del servicio updateUsuario', data);
       }),
       catchError((error) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'No se pudo actualizar el cliente, si el problema persiste contacte con el Administrador'
+          text: 'No se pudo actualizar el Usuario, si el problema persiste contacte con el Administrador'
         })
         throw error;
       })

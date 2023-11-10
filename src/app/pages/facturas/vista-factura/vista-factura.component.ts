@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import * as jsPDF from 'jspdf';
+import   jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-vista-factura',

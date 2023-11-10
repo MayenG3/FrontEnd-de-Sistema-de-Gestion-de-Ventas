@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Usuarios } from './usuarios';
 import { usuarioservice } from './usuarios.service';
 import Swal from 'sweetalert2';
+import * as crypto from 'crypto-js';
 
 
 
@@ -16,7 +17,7 @@ export class UsuariosComponent implements OnInit {
     id_usuario: '',
     usuario: '',
     id_persona: '',
-    id_rol: '',
+    id_rol: 0,
     clave: '',
     fecha_crear: null,
     usuario_crear: '',
@@ -26,7 +27,7 @@ export class UsuariosComponent implements OnInit {
   };
 
 
-  constructor(private service: usuarioservice){}
+  constructor(private service: usuarioservice) {}
 
   ngOnInit(): void {
     this.service.getListadoUsuarios().subscribe((data) => {
@@ -34,6 +35,11 @@ export class UsuariosComponent implements OnInit {
     });
   }
   actualizarUsuario() {
+    // Aplicar SHA-1 a la contraseña antes de actualizar
+    const claveCifrada = crypto.SHA1(this.editarUsuario.clave).toString();
+
+    this.editarUsuario.clave = claveCifrada;
+
     const fecha_crear = new Date(
       this.editarUsuario.fecha_crear ? this.editarUsuario.fecha_crear : ''
     );
@@ -47,8 +53,10 @@ export class UsuariosComponent implements OnInit {
 
     this.service.actualizarUsuario(this.editarUsuario).subscribe((usuario) => {
       console.log('Usuario actualizado con éxito:', usuario);
+      Swal.fire('¡Éxito!', 'Usuario actualizado con éxito', 'success');
     });
   }
+
 
 
   borrar(usuarioEliminado: Usuarios) {

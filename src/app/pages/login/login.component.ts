@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit{
       .subscribe((usuario) => {
         if (usuario) {
           // Cifra la contraseña ingresada con SHA-1
+          
           const claveCifrada = crypto.SHA1(this.claveUsuario).toString();
 
           if (

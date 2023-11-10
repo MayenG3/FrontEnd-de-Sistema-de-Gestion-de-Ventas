@@ -11,13 +11,12 @@ export class LoginService {
 
   private apiUrl = 'http://localhost:8080/facturador/usuarios';
 
-  constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient) { }
   getUsuarioByNombre(nombreUsuario: string): Observable<Usuario> {
     const url = `${this.apiUrl}/${nombreUsuario}`;
     return this.http.get<Usuario>(url)
     .pipe(
       tap(data => {
-        // Imprime la respuesta en la consola
         console.log('usuario encontrado: ', data);
       }),
       catchError(error => {

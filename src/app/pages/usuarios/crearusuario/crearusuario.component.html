@@ -26,13 +26,13 @@
                     <i id= "icon-select" class="fa-solid fa-users"></i>
                     <select id="role" name="role" #role required>
                         
-                        <option value="1">Administrador</option>
-                        <option value="2">Usuario</option>
+                        <option value="1" >Administrador</option>
+                        <option value="2" >Usuario</option>
                     </select>
                     
                 </div>
                 
-                <button (click)="crearCliente(usuario.value, claves.value, role.value)">Crear Cliente</button>
+                <button (click)="crearCliente(usuario.value, claves.value, parseRole(role.value))">Crear Cliente</button>
             </form>
         </div>
     </div>

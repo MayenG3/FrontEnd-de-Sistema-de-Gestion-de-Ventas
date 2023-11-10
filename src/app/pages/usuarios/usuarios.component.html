@@ -5,7 +5,7 @@
     <main>
         <div class="nuevo-usuario">
             <a class="btn btn-success" id="new" style="float: right; margin-right: 2px;" [routerLink]="['/usuarios/crear']">
-                <i class="fa-solid fa-notes-medical"></i> Nuevo USUARIO
+                <i class="fa-solid fa-notes-medical"></i> Nuevo usuario
             </a>
         </div>
         <div class="userList" id="userList">
@@ -14,15 +14,19 @@
                     <tr>
                         <th>
                             <i class="fa-solid fa-pen-to-square" style="color: #e63946;"></i>
-                            id
+                            Id
                         </th>
                         <th>
-                            <i class="fa-solid fa-boxes-stacked" style="color: #e63946;"></i>
-                            USUARIO
+                          <i class="fa-solid fa-user" style="color: #e63946;"></i>
+                            Usuario
                         </th>
                         <th>
-                            <i class="fa-solid fa-list" style="color: #e63946;"></i>
+                          <i class="fa-solid fa-lock"style="color: #e63946;"></i>
                             Contraseña
+                        </th>
+                        <th>
+                          <i class="fa-solid fa-sliders" style="color: #e63946;"></i>
+                            Rol
                         </th>
                         <th>
                             <i class="fa-solid fa-bolt" style="color: #e63946;"></i>
@@ -31,24 +35,22 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let usuario of usuarios">
-                        <td>{{usuario.id_usuario}}</td>
-                        <td>{{usuario.usuario}}</td>
-                        <td>{{usuario.clave}}</td>
-            
-                        <td class="td_boton">
-                            <a
-                              class="edit-btn"
-                              data-bs-toggle="modal"
-                              data-bs-target="#editarModal"
-                              (click)="editarUsuario = usuario"
-                              >Editar
-                            </a>
-                            <a id="EliminarUsuario" class="delete-btn" (click)="borrar(usuario)">Eliminar </a>
-                          </td>
-                    </tr>
+                  <tr *ngFor="let usuario of usuarios">
+                    <td>{{usuario.id_usuario}}</td>
+                    <td>{{usuario.usuario}}</td>
+                    <td>{{usuario.clave}}</td>
+                    <td>
+                      {{usuario.id_rol === 1 ? 'Administrador' : (usuario.id_rol ===2 ? 'Usuario' : 'Otro')}}
+
+                    </td>
+                    <td class="td_boton">
+                      <a class="edit-btn" data-bs-toggle="modal" data-bs-target="#editarModal" (click)="editarUsuario = usuario">Editar</a>
+                      <a id="EliminarUsuario" class="delete-btn" (click)="borrar(usuario)">Eliminar</a>
+                    </td>
+                  </tr>
+                </tbody>
                 
-            </tbody>
+              
             </table>
         </div>
         <a [routerLink]="[ './create']"></a>
