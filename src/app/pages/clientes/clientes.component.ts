@@ -53,7 +53,7 @@ export class ClientesComponent implements OnInit {
 
     //recuperar el usuario que incio sesion
     this.usuario = this.authService.getLoggedInUser();
-
+    console.log(this.usuario);
     //asignar el id del usuario que lo modifico
     this.editarCliente.usuario_mod = this.usuario.id_rol;
 

@@ -6,12 +6,28 @@ export const navbarData = [
     },
     {
         routeLink: '/productos',
-        icon: 'fa-solid fa-users',
-        label: 'productos'
+        icon: 'fas fa-store-alt',
+        label: 'Productos'
     },
     {
-        routeLink: '/clientes/crear',
-        icon: 'fa-solid fa-users',
-        label: 'crear cliente'
-    }
+        routeLink: '/facturas',
+        icon: 'fas fa-fw fa-folder',
+        label: 'Facturas'
+    },
+    {
+        routeLink: '/proveedores',
+        icon: 'fa-solid fa-parachute-box',
+        label: 'Proveedores'
+    },
+    {
+        routeLink: '/compras',
+        icon: 'fa-solid fa-cart-arrow-down',
+        label: 'Compras'
+    },
+    {
+        routeLink: '/usuarios',
+        icon: 'fas fa-fw fa-folder',
+        label: 'Usuarios'
+    },
+
 ];

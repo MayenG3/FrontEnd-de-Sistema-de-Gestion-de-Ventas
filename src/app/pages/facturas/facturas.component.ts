@@ -4,6 +4,7 @@ import { FacturasService } from './facturas.service';
 import { Clientes } from '../clientes/cliente';
 import { clientesService } from '../clientes/clientes.service';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-facturas',
@@ -15,8 +16,11 @@ export class FacturasComponent {
   clientes: Clientes[] = [];
   
 
-  constructor(private facturaService: FacturasService, private clienteService: clientesService){}
-
+  constructor(private facturaService: FacturasService, private clienteService: clientesService, private router: Router){}
+  verFactura(id: string) {
+    this.router.navigate(['/facturas', id]);
+  }
+  
   ngOnInit(): void {
     this.facturaService.getAll().subscribe( f=>{ this.facturas =  f; })
 

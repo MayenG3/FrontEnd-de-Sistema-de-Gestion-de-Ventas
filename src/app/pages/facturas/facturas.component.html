@@ -55,7 +55,7 @@
                 <td>{{ factura.numero }}</td>
                 <td>{{ factura.estado }}</td>
                 <td>
-                    <button class="edit-btn" target="_blank">Ver Factura</button>
+                    <button class="edit-btn" (click)="verFactura(factura.id_factura)">Ver Factura</button>
                     <button id="AnularFactura" class="delete-btn" (click)="anular(factura)" 
                     *ngIf="factura.estado === 'Emitida'" [disabled]="factura.estado !== 'Emitida'">Anular</button>
                 </td>

@@ -11,10 +11,23 @@ import { DetalleFacturas } from './detalle-facturas';
 export class FacturasService {
   private url: string = "http://localhost:8080/facturador/facturas"
   private urlDetalle: string = "http://localhost:8080/facturador/detalleFactura"
+  private urlDId: string = "http://localhost:8080/facturador/detalle"
   constructor(private http: HttpClient) { }
 
   getAll():Observable<Facturas[]>{
     return this.http.get<Facturas[]>(this.url);
+  }
+
+  getAllDetalle():Observable<DetalleFacturas[]>{
+    return this.http.get<DetalleFacturas[]>(this.url);
+  }
+
+  getFacturaById(id: string): Observable<Facturas> {
+    return this.http.get<Facturas>(`${this.url}/${id}`);
+  }
+
+  getDetalleFacturaById(id: string): Observable<DetalleFacturas[]> {
+    return this.http.get<DetalleFacturas[]>(`${this.urlDId}/${id}`);
   }
 
   insertarFactura(factura:Facturas ): Observable<Facturas> {

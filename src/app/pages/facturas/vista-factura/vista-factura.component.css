@@ -1,0 +1,73 @@
+#content{
+    font-family: Arial, sans-serif;
+    padding: 10px 10px 10px 10px;
+    width: 595px;
+    height: 842px;
+    
+}
+
+.header {
+    margin-bottom: 20px;
+    white-space: nowrap;
+}
+
+.header p {
+    margin: 5px;
+}
+
+.titulo-header {
+    background-color: #f2f2f2;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th,
+td {
+    padding: 4px;
+    text-align: left;
+}
+
+thead {
+    background-color: #f2f2f2;
+}
+
+.total {
+    text-align: right;
+    font-weight: bold;
+    padding-top: 30px;
+}
+
+.right-align {
+    text-align: right;
+}
+
+.center_align {
+    text-align: center;
+}
+
+.product-cell {
+    width: 60%;
+}
+
+.price-cell {
+    width: 20%;
+}
+
+.quantity-cell {
+    width: 15%;
+}
+
+.contenido {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+}
+.contenido2 {
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 10px;
+    
+}

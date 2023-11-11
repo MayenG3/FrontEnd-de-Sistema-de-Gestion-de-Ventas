@@ -66,6 +66,10 @@ export class CreatefacturasComponent {
     this.agregarFila();
   }
 
+  verFactura(id: string) {
+    
+  }
+
   crearFactura(cliente: string) {
     const today = new Date();
     today.setHours(0, 0, 0, 0);
@@ -105,7 +109,8 @@ export class CreatefacturasComponent {
         this.detalleFactura.precio = productoAgregado.precio;
         // Luego, envía los detalles de cada producto al servidor
         this.facturaService.insertarDetalleFactura(this.detalleFactura).subscribe((_detalleFactura) => {
-          this.router.navigate(['/facturas']);
+          //this.router.navigate(['/facturas']);
+          this.router.navigate(['/facturas', this.facturaCreadaId]);
         });
       }
     });
