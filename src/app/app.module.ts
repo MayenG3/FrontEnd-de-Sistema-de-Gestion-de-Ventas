@@ -18,6 +18,8 @@ import { FacturasComponent } from './pages/facturas/facturas.component';
 import { CreatefacturasComponent } from './pages/facturas/createfacturas.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { VistaFacturaComponent } from './pages/facturas/vista-factura/vista-factura.component';
+import { CreateCompraComponent } from './pages/compras/create-compra/create-compra.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -36,12 +38,14 @@ import { VistaFacturaComponent } from './pages/facturas/vista-factura/vista-fact
     CreatefacturasComponent,
     ComprasComponent,
     VistaFacturaComponent,
+    CreateCompraComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

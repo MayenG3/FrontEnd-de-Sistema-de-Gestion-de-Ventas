@@ -14,6 +14,7 @@ import { FacturasComponent } from './pages/facturas/facturas.component';
 import { CreatefacturasComponent } from './pages/facturas/createfacturas.component';
 import { VistaFacturaComponent } from './pages/facturas/vista-factura/vista-factura.component';
 import { ComprasComponent } from './pages/compras/compras.component';
+import { CreateCompraComponent } from './pages/compras/create-compra/create-compra.component';
 
 
 const routes: Routes = [
@@ -30,8 +31,9 @@ const routes: Routes = [
   { path: 'facturas',component:FacturasComponent, canActivate: [AuthGuard]},
   { path: 'facturas/new',component:CreatefacturasComponent, canActivate: [AuthGuard]},
   { path: 'facturas/verFactura',component:VistaFacturaComponent, canActivate: [AuthGuard]},
-  { path: 'facturas/:id', component: VistaFacturaComponent },
-  { path: 'compras', component: ComprasComponent },
+  { path: 'facturas/:id', component: VistaFacturaComponent, canActivate: [AuthGuard] },
+  { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard] },
+  {path: 'compras/crear', component: CreateCompraComponent, canActivate: [AuthGuard]},
 
 ];
 

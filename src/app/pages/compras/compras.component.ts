@@ -41,7 +41,7 @@ export class ComprasComponent implements OnInit {
   }
 
   //metodo para anular la compra
-  deleteCompra(compra: Compras){
+  deleteCompra(compra: Compras) {
     Swal.fire({
       title: 'Estas seguro?',
       text: 'No podrás revertir esto!',
@@ -71,20 +71,26 @@ export class ComprasComponent implements OnInit {
           (producto) => producto.id_producto === compra.id_producto
         );
 
-        if(product){
-          product.existencia = String(Number(product.existencia) - Number(compra.cantidad));
+        if (product) {
+          product.existencia = String(
+            Number(product.existencia) - Number(compra.cantidad)
+          );
           console.log(product);
-          this.serviceProduct.updateProducto(product).subscribe((producto)=>{
+          this.serviceProduct.updateProducto(product).subscribe((producto) => {
             console.log(producto);
-          })
-        }else{
-          console.log("----no se encontro coincidencia con productos---")
+          });
+        } else {
+          console.log('----no se encontro coincidencia con productos---');
         }
 
         this.service.updateCompra(compra).subscribe((compra) => {
           console.log(compra);
-          window.location.reload();
+          //window.location.reload();
           // Realiza cualquier acción adicional después de la actualización
+          Swal.fire('¡Eliminado!', 'La compra ha sido eliminado.', 'success');
+          this.compras = this.compras.filter(
+            (comp) => comp.id_compra !== compra.id_compra
+          );
         });
       }
     });

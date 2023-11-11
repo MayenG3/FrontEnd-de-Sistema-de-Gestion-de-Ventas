@@ -1,0 +1,90 @@
+<link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+/>
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+  integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+  crossorigin="anonymous"
+/>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css"
+/>
+<app-sidebar></app-sidebar>
+<body>
+  <section>
+    <div class="form-box">
+      <div class="form-value">
+        <h2>Ingresar Compra</h2>
+        <div class="rol-select">
+          <div class="row-select">
+            <i class="fa-solid fa-caret-down"></i>
+          </div>
+          <i id="icon-select" class="fa-solid fa-users"></i>
+          <select id="editProveedor" name="editProveedor" #proveedor required>
+            <option selected disabled>seleccione un proveedor</option>
+            <option
+              *ngFor="let proveedor of proveedores"
+              value="{{ proveedor.id_proveedor }}"
+            >
+              {{ proveedor.nombre }}
+            </option>
+          </select>
+        </div>
+        <div class="rol-select">
+          <div class="row-select">
+            <i class="fa-solid fa-caret-down"></i>
+          </div>
+          <i id="icon-select" class="fa-solid fa-tag"></i>
+          <select id="editProveedor" name="editProveedor" #producto required>
+            <option selected disabled>seleccione un Producto</option>
+            <option
+              *ngFor="let producto of productos"
+              value="{{ producto.id_producto }}"
+            >
+              {{ producto.producto }}
+            </option>
+          </select>
+        </div>
+        <div class="inputbox">
+          <i class="fa-solid fa-circle-plus"></i>
+          <input type="text" id="cantidad" name="cantidad" #cantidad required />
+          <label for="cantidad">Cantidad</label>
+        </div>
+        <div class="inputbox">
+          <i class="fa-solid fa-piggy-bank"></i>
+          <input type="text" id="precio" name="precio" #precio required />
+          <label for="precio">Precio de compra</label>
+        </div>
+        <button
+          (click)="
+            crearCompra(
+              producto.value,
+              proveedor.value,
+              cantidad.value,
+              precio.value
+            )
+          "
+        >
+          Ingresar
+        </button>
+      </div>
+    </div>
+  </section>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"
+  ></script>
+</body>

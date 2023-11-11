@@ -51,4 +51,27 @@ export class ComprasService {
     );
   }
 
+  // Método para insertar un cliente
+  insertarCompra(compra: Compras): Observable<Compras> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+    };
+    return this.http.post<Compras>(this.apiUrl, compra, httpOptions).pipe(
+      tap((data) => {
+        // Imprime la respuesta en la consola
+        console.log('Respuesta del servicio insertarCompra', data);
+      }),
+      catchError((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'No se pudo registrar la compra, si el problema persiste contacte con el Administrador'
+        })
+        throw error;
+      })
+    );
+  }
+
 }

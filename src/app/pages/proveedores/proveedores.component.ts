@@ -78,6 +78,9 @@ export class ProveedoresComponent implements OnInit {
         this.service.actualizarproveedor(proveedorEliminado).subscribe((proveedor) => {
           console.log('Proveedor eliminado con éxito:', proveedor);
           Swal.fire('Eliminado!', 'El Proveedor ha sido eliminado.', 'success');
+          this.proveedor = this.proveedor.filter(
+            (p) => p.id_proveedor !== proveedorEliminado.id_proveedor
+          );
           // Realiza cualquier acción adicional después de la actualización
         });
       }

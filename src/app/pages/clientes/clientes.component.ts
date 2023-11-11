@@ -95,8 +95,10 @@ export class ClientesComponent implements OnInit {
         clienteEliminado.estado = 'Inactivo';
         this.service.updateCliente(clienteEliminado).subscribe((cliente) => {
           console.log("cliente eliminado exitosamente",cliente);
-          this.ngOnInit()
+          //this.ngOnInit()
           // Realiza cualquier acción adicional después de la actualización
+          Swal.fire('¡Eliminado!', 'El Cliente ha sido eliminado.', 'success');
+              this.clientes = this.clientes.filter((cliente: Clientes) => cliente.id_cliente !== clienteEliminado.id_cliente);
         });
       }
     });
