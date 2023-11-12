@@ -1,4 +1,4 @@
-import { Component} from '@angular/core';
+import { Component, Input} from '@angular/core';
 import { navbarData } from './nav-data';
 import { AuthService } from 'src/app/auth.service';
 
@@ -9,7 +9,7 @@ import { AuthService } from 'src/app/auth.service';
 })
 export class SidebarComponent {
   navbarData = navbarData;
-  isSidebarHidden = true;
+  @Input() isSidebarHidden = true;
 
   constructor(private authService: AuthService) {}
 

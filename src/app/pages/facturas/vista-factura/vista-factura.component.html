@@ -1,82 +1,95 @@
-<div >
-<br>
-  <h2>Vista Previa de Factura</h2>
-  <button class="btn btn-dark" (click)="downloadPDF()">Descargar</button></div>
+<div id="container">
+  <app-sidebar></app-sidebar>
+  <div id="content" *ngIf="factura">
+    <br />
+    <div style="text-align: center;">
+      <h2>Vista Previa de Factura</h2>
+      <button class="btn btn-dark" (click)="downloadPDF()">Descargar</button>
+    </div>
 
-<div id = "content" #content  *ngIf="factura">
-  <div class="header">
-    <div class="factura">
-      <table>
-        <tr>
-          <td >
-            <p class="titulo-header">Dato de factura</p>
-            <p>Serie: {{ factura.serie }}</p>
-            <p>Número: {{ factura.numero }}</p>
-            <p>Autorización: {{ factura.authorization }}</p>
-          </td >
-          <td style="text-align: right">
-            <img class="logo" src="/assets/logoF.png" style="width: 150px; height: auto;">
-          </td>
-        </tr>
-      </table>
+    <div id="content" #content *ngIf="factura">
+      <div class="header">
+        <div class="factura">
+          <table>
+            <tr>
+              <td>
+                <p class="titulo-header">Dato de factura</p>
+                <p>Serie: {{ factura.serie }}</p>
+                <p>Número: {{ factura.numero }}</p>
+                <p>Autorización: {{ factura.authorization }}</p>
+              </td>
+              <td style="text-align: right">
+                <img
+                  class="logo"
+                  src="/assets/logoF.png"
+                  style="width: 150px; height: auto"
+                />
+              </td>
+            </tr>
+          </table>
+        </div>
+        <div class="cliente contenido">
+          <table>
+            <tr>
+              <td>
+                <p>Cliente:</p>
+                <p>Direccion:</p>
+              </td>
+              <td>
+                <p>{{ getClientsInfo(factura.id_cliente).nombre }}</p>
+                <p>{{ getClientsInfo(factura.id_cliente).direccion }}</p>
+              </td>
+              <td>
+                <p>Fecha de emision:</p>
+                <p>NIT:</p>
+              </td>
+              <td>
+                <p>{{ factura.fecha_crear }}</p>
+                <p>{{ getClientsInfo(factura.id_cliente).nit }}</p>
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2">
+                <p style="padding: 3px">Atendido por: {{ usuario.usuario }}</p>
+              </td>
+            </tr>
+          </table>
+        </div>
+      </div>
+      <div class="contenido2">
+        <table style="height: 90%">
+          <thead>
+            <tr>
+              <th class="quantity-cell">cantidad</th>
+              <th class="product-cell">Producto</th>
+              <th class="price-cell center_align">Precio Unitario</th>
+              <th class="price-cell center_align">Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let detalle of detalleFacturas">
+              <td class="quantity-cell">{{ detalle.cantidad }}</td>
+              <td class="product-cell">
+                {{ getProductName(detalle.id_producto) }}
+              </td>
+              <td class="price-cell" style="padding-left: 35px">
+                {{ detalle.precio }}
+              </td>
+              <td class="price-cell right-align">
+                {{ getSubtotales(detalle.cantidad, detalle.precio) }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <table>
+          <tfoot>
+            <tr>
+              <td colspan="3" class="total right-align">Total</td>
+              <td class="total right-align">Q.{{ getTotal() }}</td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
     </div>
-    <div class="cliente contenido">
-      <table>
-        <tr>
-          <td>
-            <p>Cliente:</p>
-            <p>Direccion:</p>
-          </td>
-          <td >
-            <p>{{getClientsInfo(factura.id_cliente).nombre }}</p>
-            <p>{{getClientsInfo(factura.id_cliente).direccion }}</p>
-          </td>
-          <td>
-            <p>Fecha de emision: </p>
-            <p>NIT:</p>
-          </td>
-          <td>
-            <p>{{ factura.fecha_crear }}</p>
-            <p>{{getClientsInfo(factura.id_cliente).nit}}</p>
-          </td>
-        </tr>
-        <tr>
-          <td colspan="2" >
-            <p style="padding: 3px">Atendido por:  {{usuario.usuario}}</p>
-          </td>
-        </tr>
-      </table>
-    </div>
-  </div>
-  <div class="contenido2">
-    <table style="height: 90%">
-      <thead>
-        <tr >
-          <th class="quantity-cell">cantidad</th>
-          <th class="product-cell">Producto</th>
-          <th class="price-cell center_align">Precio Unitario</th>
-          <th class="price-cell center_align">Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let detalle of  detalleFacturas">
-          <td class="quantity-cell">{{detalle.cantidad}}</td>
-          <td class="product-cell">{{getProductName(detalle.id_producto)}}</td>
-          <td class="price-cell" style="padding-left: 35px;">{{detalle.precio}}</td>
-          <td class="price-cell right-align">{{getSubtotales(detalle.cantidad,detalle.precio)}}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <table>
-      <tfoot> 
-        <tr>
-          <td colspan="3" class="total right-align">Total</td>
-          <td class="total right-align">Q.{{getTotal()}}</td>
-        </tr>
-      </tfoot>
-    </table>
-   
   </div>
 </div>
-<button (click)="downloadPDF()">name</button>

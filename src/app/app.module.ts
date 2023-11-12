@@ -20,6 +20,7 @@ import { ComprasComponent } from './pages/compras/compras.component';
 import { VistaFacturaComponent } from './pages/facturas/vista-factura/vista-factura.component';
 import { CreateCompraComponent } from './pages/compras/create-compra/create-compra.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ComprasComponent,
     VistaFacturaComponent,
     CreateCompraComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,

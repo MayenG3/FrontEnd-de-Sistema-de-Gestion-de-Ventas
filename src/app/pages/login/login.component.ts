@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit{
     // Verificar si hay una sesión abierta
     if (this.cookieService.check('usuario')) {
       // Redirigir al componente de clientes
-      this.router.navigate(['clientes']);
+      this.router.navigate(['dashboard']);
     }
   }
 
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit{
             );
 
             // Las credenciales son correctas, redirige al componente de inicio
-            this.router.navigate(['clientes']);
+            this.router.navigate(['dashboard']);
           } else {
             Swal.fire({
               icon: 'error',

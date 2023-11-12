@@ -6,6 +6,14 @@
     
 }
 
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh; /* Ajusta la altura según tus necesidades */
+  }
+
 .header {
     margin-bottom: 20px;
     white-space: nowrap;

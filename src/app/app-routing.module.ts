@@ -15,6 +15,7 @@ import { CreatefacturasComponent } from './pages/facturas/createfacturas.compone
 import { VistaFacturaComponent } from './pages/facturas/vista-factura/vista-factura.component';
 import { ComprasComponent } from './pages/compras/compras.component';
 import { CreateCompraComponent } from './pages/compras/create-compra/create-compra.component';
+import { DashboardComponent } from './pages/dashboard/dashboard.component';
 
 
 const routes: Routes = [
@@ -34,7 +35,7 @@ const routes: Routes = [
   { path: 'facturas/:id', component: VistaFacturaComponent, canActivate: [AuthGuard] },
   { path: 'compras', component: ComprasComponent, canActivate: [AuthGuard] },
   {path: 'compras/crear', component: CreateCompraComponent, canActivate: [AuthGuard]},
-
+  {path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
