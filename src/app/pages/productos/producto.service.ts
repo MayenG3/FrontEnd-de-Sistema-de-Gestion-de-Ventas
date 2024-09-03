@@ -2,17 +2,15 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, catchError, tap } from 'rxjs';
 import { Producto } from './producto';
-
 import Swal from 'sweetalert2';
 import { Router } from '@angular/router';
+
 @Injectable({
   providedIn: 'root'
 })
 export class ProductoService {
 
-  private url: string = "http://localhost:8080/facturador/productos"
-  private urlC: string = "http://localhost:8080/facturador/categorias"
-
+  private url: string = "http://localhost:8082/products"
   constructor(private http: HttpClient, private router: Router) { }
 
   //obtener todos los productos

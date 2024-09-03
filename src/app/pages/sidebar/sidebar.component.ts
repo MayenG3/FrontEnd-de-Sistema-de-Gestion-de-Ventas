@@ -1,6 +1,5 @@
 import { Component, Input} from '@angular/core';
 import { navbarData } from './nav-data';
-import { AuthService } from 'src/app/auth.service';
 
 @Component({
   selector: 'app-sidebar',
@@ -11,13 +10,10 @@ export class SidebarComponent {
   navbarData = navbarData;
   @Input() isSidebarHidden = true;
 
-  constructor(private authService: AuthService) {}
 
   toggleSidebar() {
     this.isSidebarHidden = !this.isSidebarHidden;
   }
 
-  onLogout() {
-    this.authService.logout(); // Llama al método de cierre de sesión
-  }
+
 }

@@ -1,0 +1,48 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css">
+<body>
+    <app-sidebar></app-sidebar>
+    <section>
+        <div class="form-box">
+            <div class="form-value">
+                <h2>Registrar Cliente</h2>
+                <form [formGroup]="customerForm" (ngSubmit)="registerCustomer()">
+                    <div class="inputbox">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                      <input type="text" id="name" formControlName="name" required>
+                      <label for="name">Nombre de Cliente</label>
+                    </div>
+                    <div class="inputbox">
+                      <i class="fa-solid fa-pen-to-square"></i>
+                      <input type="email" id="email" formControlName="email" required>
+                      <label for="email">Email</label>
+                      <div *ngIf="customerForm.get('email')?.invalid && (customerForm.get('email')?.dirty || customerForm.get('email')?.touched)">
+                        <small *ngIf="customerForm.get('email')?.hasError('required')">El email es obligatorio.</small>
+                        <small *ngIf="customerForm.get('email')?.hasError('email')">El email no es válido.</small>
+                      </div>
+                    </div>
+                    <div class="inputbox">
+                      <i class="fa-solid fa-circle-plus"></i>
+                      <input type="text" id="phone" formControlName="phone" required>
+                      <label for="phone">Teléfono</label>
+                    </div>
+                    <div class="inputbox">
+                      <i class="fa-solid fa-dollar-sign"></i>
+                      <input type="text" id="address" formControlName="address" required>
+                      <label for="address">Dirección</label>
+                    </div>
+                    <button type="submit" [disabled]="customerForm.invalid">Registrar Cliente</button>
+                  </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>

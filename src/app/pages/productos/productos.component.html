@@ -1,17 +1,20 @@
 <app-sidebar></app-sidebar>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="crossorigin="anonymous">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">     
+
+<!-- Enlaces de estilo -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+  crossorigin="anonymous">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+  integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.min.css">
 
- 
 <div style="text-align: center"><h1>PRODUCTOS</h1></div>
+
 <main>
   <div class="nuevo-producto">
-   
-    <a class="btn btn-success" id="new"
-    style="float: right; margin-right: 2px" [routerLink]="['./create']">Nuevo producto</a>
-
+    <a class="btn btn-success" id="new" style="float: right; margin-right: 2px" [routerLink]="['./create']">Nuevo producto</a>
   </div>
+
   <div class="userList" id="userList">
     <table id="ProductoTable" class="table table-hover table-striped">
       <thead>
@@ -21,13 +24,16 @@
             Producto
           </th>
           <th>
+            <i class="fa-solid fa-file-lines" style="color: #e63946"></i>
+            Descripción
+          </th>
+          <th>
             <i class="fa-solid fa-boxes-stacked" style="color: #e63946"></i>
             Existencia
           </th>
-
           <th>
-            <i class="fa-solid fa-list" style="color: #e63946"></i>
-            Categoria
+            <i class="fa-solid fa-dollar-sign" style="color: #e63946"></i>
+            Precio
           </th>
           <th>
             <i class="fa-solid fa-bolt" style="color: #e63946"></i>
@@ -37,90 +43,60 @@
       </thead>
       <tbody>
         <tr *ngFor="let producto of productos">
-          <th scope="row">{{ producto.producto }}</th>
-          <td>{{ producto.existencia }}</td>
-          <td>{{ getCategoriesName(producto.id_categoria) }}</td>
+          <th scope="row">{{ producto.name }}</th>
+          <td>{{ producto.description }}</td>
+          <td>{{ producto.stock }}</td>
+          <td>{{ producto.price | currency:'Q' }}</td>
           <td class="td_boton">
-            <a
-              href=""
-              class="edit-btn"
-              data-bs-toggle="modal"
-              data-bs-target="#editarModal"
-              (click)="editarProducto = producto"
-              >Editar
-            </a>
-            <a id="EliminarProducto" class="delete-btn" (click)="borrar(producto)">Eliminar </a>
+            <a href="" class="edit-btn" data-bs-toggle="modal" data-bs-target="#editarModal" (click)="editarProducto = producto">Editar</a>
+            <a id="EliminarProducto" class="delete-btn" (click)="borrar(producto)">Eliminar</a>
           </td>
         </tr>
       </tbody>
-    </table>
+    </table>  
   </div>
 </main>
-<div
-  class="modal fade"
-  id="editarModal"
-  tabindex="-1"
-  aria-labelledby="editarModalLabel"
-  aria-hidden="true"
->
+
+<div class="modal fade" id="editarModal" tabindex="-1" aria-labelledby="editarModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="editarModalLabel">Datos del producto</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="modal"
-          aria-label="Close"
-        ></button>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
         <form id="editForm" action="" method="POST">
           <div>
-            <label for="editProducto">Nombre de producto </label>
-            <input
-              type="text"
-              id="editProducto"
-              name="editProducto"
-              placeholder="Ingrese el nombre del producto"
-              [(ngModel)]="editarProducto.producto"
-            />
+            <label for="editProducto">Nombre de producto</label>
+            <input type="text" id="editProducto" name="editProducto" placeholder="Ingrese el nombre del producto" [(ngModel)]="editarProducto.name" />
           </div>
           <br />
           <div>
-            <label for="editCategoria">Categoria </label>
-            <select id="editCategoria" name="editCategoria" [(ngModel)]="editarProducto.id_categoria">
-              <option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">{{ categoria.categoria}}</option>
-            </select>
+            <label for="editDescription">Descripción</label>
+            <input type="text" id="editDescription" name="editDescription" placeholder="Ingrese la descripción" [(ngModel)]="editarProducto.description" />
           </div>
-          
           <br />
           <div>
-            <label for="editExistencia">Existencia </label>
-            <input
-              type="text"
-              id="editExistencia"
-              name="editExistencia"
-              placeholder="Ingrese la existencia"
-              [(ngModel)]="editarProducto.existencia"
-            />
+            <label for="editPrice">Precio</label>
+            <input type="number" id="editPrice" name="editPrice" placeholder="Ingrese el precio" [(ngModel)]="editarProducto.price" />
+          </div>
+          <br />
+          <div>
+            <label for="editExistencia">Existencia</label>
+            <input type="number" id="editExistencia" name="editExistencia" placeholder="Ingrese la existencia" [(ngModel)]="editarProducto.stock" />
           </div>
           <br />
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-          Cancelar
-        </button>
-        <button id="guardarCambiosBtn" type="button" class="btn btn-primary" (click)="update()" data-bs-dismiss="modal">
-          Editar
-        </button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button id="guardarCambiosBtn" type="button" class="btn btn-primary" (click)="update()" data-bs-dismiss="modal">Editar</button>
       </div>
     </div>
   </div>
 </div>
 
+<!-- Scripts -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>
-    
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.20/dist/sweetalert2.all.min.js"></script>

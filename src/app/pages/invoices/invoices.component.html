@@ -1,0 +1,88 @@
+<!-- invoices.component.html -->
+
+<app-sidebar></app-sidebar>
+
+<div style="text-align: center"><h1>Facturas</h1></div>
+<main>
+  <div class="nueva-fatura">
+    <a
+      class="btn btn-success"
+      id="new"
+      style="float: right; margin-right: 2px"
+      [routerLink]="['./create']"
+      >Nueva Factura</a>
+      <br><br><br>
+  </div>
+  <div class="userList" id="userList">
+    <table id="FacturasTable" class="table table-hover table-striped">
+        <thead>
+            <tr>
+                <th>
+                    <i class="fa-solid fa-pen-to-square" style="color: #e63946;"></i>
+                    Numero de Factura
+                </th>
+                <th>
+                    <i class="fa-solid fa-pen-to-square" style="color: #e63946;"></i>
+                    Cliente
+                </th>
+                <th>
+                    <i class="fa-solid fa-boxes-stacked" style="color: #e63946;"></i>
+                    Total de Factura
+                <th>
+                    <i class="fa-solid fa-list" style="color: #e63946;"></i>
+                    Estado
+                </th>
+                <th>
+                    <i class="fa-solid fa-bolt" style="color: #e63946;"></i>
+                    Acciones
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let factura of facturas">
+                <td>{{ factura.id }}</td>
+                <td>{{ factura.customerName }}</td>
+                <td>{{ factura.total }}</td>
+                <td>{{ factura.status }}</td>
+                <td>
+                    <button class="edit-btn" (click)="viewInvoice(factura.id)">Ver Factura</button>
+                    <button id="AnularFactura" class="delete-btn" (click)="cancelInvoice(factura.id)"
+                    *ngIf="factura.status === 'Emitida'" [disabled]="factura.status !== 'Emitida'">Anular</button>
+                </td>
+            </tr>        
+        </tbody>
+    </table>
+  </div>
+</main>
+
+
+<!-- Modal -->
+<div class="modal fade" id="invoiceDetailsModal" tabindex="-1" aria-labelledby="invoiceDetailsModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="invoiceDetailsModalLabel">Detalles de la Factura</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div *ngIf="selectedInvoice">
+            <p><strong>Nombre del Cliente:</strong> {{ selectedCustomer.name }}</p>
+            <p><strong>Numero de Factura:</strong> {{ selectedInvoice.invoice.id }}</p>
+            <p><strong>Total:</strong> {{ selectedInvoice.invoice.total | currency:'Q.' }}</p>
+  
+            <h6>Productos:</h6>
+            <ul>
+              <li *ngFor="let detail of selectedInvoice.details">
+                {{ getProductName(detail.product_id) }} - {{ detail.quantity }} x {{ detail.price | currency:'Q.' }}
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  

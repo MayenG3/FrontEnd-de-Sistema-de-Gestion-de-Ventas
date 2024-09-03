@@ -1,0 +1,68 @@
+<app-sidebar></app-sidebar>
+<body>
+  <main>
+    <form [formGroup]="invoiceForm" (ngSubmit)="onSubmit()" id="userForm">
+      <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-4">
+          <label for="customer_id">Cliente:</label><br>
+          <select id="customer_id" formControlName="customer_id" class="form-control" required>
+            <option disabled selected>Elija un cliente</option>
+            <option *ngFor="let customer of customers" [value]="customer.id">{{ customer.name }}</option>
+          </select>
+        </div>
+
+        <div class="col-md-4">
+          <label for="fecha">Fecha:</label>
+          
+        </div>
+      </div>
+      <br><br>
+
+      <div id="detalles" class="table-responsive">
+        <table id="venta" class="table" style="text-align:center">
+          <thead>
+            <tr>
+              <th>Código de producto</th>
+              <th>Cantidad</th>
+              <th>Precio unitario</th>
+              <th>Subtotal</th>
+              <th>
+                <button type="button" class="fas fa-plus btn btn-success" style="font-size: 15px" (click)="addInvoiceDetail()"> Agregar </button>
+              </th>
+            </tr>
+          </thead>
+          <tbody formArrayName="invoiceDetails">
+            <tr *ngFor="let detail of invoiceDetails.controls; let i = index" [formGroupName]="i">
+              <td>
+                <select id="product_id_{{ i }}" formControlName="product_id" class="form-control" (change)="onProductChange(i)" required>
+                  <option disabled selected>Elija un producto</option>
+                  <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+                </select>
+              </td>
+              <td>
+                <input type="number" name="quantity{{i}}" min="1" formControlName="quantity" (change)="onProductChange(i)" class="form-control" required>
+              </td>
+              <td>
+                <input type="number" name="price{{i}}" min="0.01" step="0.01" formControlName="price" class="form-control" [disabled]="true">
+              </td>
+              <td>
+                <input type="number" name="subtotal{{i}}" readonly [value]="detail.get('subtotal')?.value" class="form-control">
+              </td>
+              
+              <td>
+                <button type="button" (click)="removeInvoiceDetail(i)" class="fas fa-trash btn btn-danger" style="font-size: 15px"></button>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr>
+              <td colspan="3"><strong>Total</strong></td>
+              <td><label id="total" style="font-size: 25px">{{ calculateTotal() }}</label></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+      <button type="submit" class="far fa-save btn btn-info" style="font-size: 17px" [disabled]="!invoiceForm.valid">Facturar</button>
+    </form>
+  </main>
+</body>
